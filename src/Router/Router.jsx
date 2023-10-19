@@ -8,8 +8,9 @@ import AddProduct from "../pages/AddProduct/AddProduct";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Profile from "../pages/Profile/Profile";
 import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
-import MyAllProduct from "../pages/AllProduct/AllProduct";
+import MyAllProduct from "../pages/MyAllProduct/MyAllProduct";
 import Bikes from "../pages/Bikes/Bikes";
+import Cars from "../pages/Cars/Cars";
 const myCreatedRoute =  createBrowserRouter([
     {
 
@@ -35,9 +36,11 @@ const myCreatedRoute =  createBrowserRouter([
                 element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute> 
             },
             {
-                path: "update-product",
-                element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>
+                path: "update-product/:id",
+                element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
             },
+
             {
                 path: "my-all-product",
                 element: <PrivateRoute><MyAllProduct></MyAllProduct></PrivateRoute>
@@ -49,10 +52,11 @@ const myCreatedRoute =  createBrowserRouter([
             {
                 path: "bikes",
                 element: <Bikes></Bikes>,
+                loader: () => fetch("http://localhost:5000/motorcycles"),
             },
             {
                 path:"cars",
-                element: <Bikes></Bikes>,
+                element: <Cars></Cars>,
             },
            
 

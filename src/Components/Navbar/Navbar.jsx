@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import Headroom from "react-headroom";
+import CartBtn from "../CartBtn/CartBtn";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -42,17 +43,26 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 {menus}
+                <div className="flex-none gap-2">
+        <div className="form-control">
+          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+        </div>
+        
+      </div>
               </ul>
             </div>
             <Link to={"/"} className="btn btn-ghost normal-case text-xl"><img className="w-auto h-3/4" src="/logo.png" alt="" /></Link>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
+            <ul className="menu menu-horizontal px-1 justify-around">
               {menus}
+             
             </ul>
           </div>
+          
           <div className="navbar-end">
-
+          
+          <CartBtn />
             {user?.email ? (
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -62,7 +72,7 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                  className="mt-3 z-[100] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li>
                     <NavLink to={"/profile"} className="justify-between">

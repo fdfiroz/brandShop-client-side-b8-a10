@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const AddProduct = () => {
     const {user} = useAuth();
     const uid = user.uid;
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(1);
     const [suggestion, setSuggestion] = useState(false);
     const handelChange = (e) => {
         setRating(e.target.value);
@@ -14,7 +14,6 @@ const AddProduct = () => {
     const handelSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        console.log(form)
         const name = form.name.value;
         const brandName = form.brandName.value;
         const description = form.description.value;
@@ -91,7 +90,7 @@ const AddProduct = () => {
             </label>
             <textarea placeholder="Bio" name="description" className="textarea textarea-bordered textarea-xs w-full max-w-xs" ></textarea>
             <div className="rating my-4" onChange={handelChange}>
-                <input type="radio" name="rating" value="1" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating" value="1" className="mask mask-star-2 bg-orange-400" defaultChecked />
                 <input type="radio" name="rating" value="2" className="mask mask-star-2 bg-orange-400" />
                 <input type="radio" name="rating" value="3" className="mask mask-star-2 bg-orange-400" />
                 <input type="radio" name="rating" value="4" className="mask mask-star-2 bg-orange-400" />

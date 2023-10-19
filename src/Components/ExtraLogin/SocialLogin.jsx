@@ -1,7 +1,7 @@
-import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const SocialLogin = () => {
     const navigate = useNavigate()
@@ -19,25 +19,20 @@ const SocialLogin = () => {
               const createdAt = res.user?.metadata?.creationTime;
               const lastSignInTime = res.user?.metadata?.lastSignInTime;
               const user = { name, email, uid, lastSignInTime, emailVerified, createdAt, photoURL };
-              fetch('http://localhost:5000/user', {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.insertedId){
-                      toast.success('User Data inserted successfully');
-                    }
+              axios.post('http://localhost:5000/user', user)
+                .then(res => {
+                  if (res.data.insertedId) {
+                    toast.success('User Data inserted successfully');
+                  }
                 })
-                toast.success('User logged in successfully');
-                navigate('/')
+              toast.success('User logged in successfully');
+              navigate('/')
             })
             .catch(error => {
-                toast.error(error.message)
+              toast.error(error.message)
             })
+            
+            
     }
   return (
     <>

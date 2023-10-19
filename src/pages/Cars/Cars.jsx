@@ -1,7 +1,9 @@
 
 const Cars = () => {
   return (
-    <div>Cars</div>
+    <div>
+      <h1>Cars</h1>
+    </div>
   )
 }
 

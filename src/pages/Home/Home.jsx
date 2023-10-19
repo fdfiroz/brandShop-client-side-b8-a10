@@ -1,9 +1,14 @@
+import AboutSection from "../../Components/AboutSection/AboutSection"
+import Header from "../../Components/Header/Header"
 
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <>
+      <Header/>
+      <AboutSection/>
+    </>
+  );
+};
 
-export default Home
+export default Home;
