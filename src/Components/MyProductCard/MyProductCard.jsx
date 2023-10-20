@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
 
-const MyProductCard = ({data}) => {
+const MyProductCard = ({data, handleDelete}) => {
     const { _id, name, brandName, category, description, image, rating, price } = data
-
     return (
         
         <div className="card w-96 bg-base-100 h-auto shadow-xl">
@@ -34,9 +34,12 @@ const MyProductCard = ({data}) => {
                 </div>
                 <div className="font-bold">{rating}/5</div>
                </div>
+                <div className="flex gap-3">
                 <Link to={`/update-product/${_id}`} className="card-actions">
-                    <button className="btn btn-primary capitalize">Update Product</button>
+                    <button className="btn btn-primary capitalize rounded-sm">Update Product</button>
                 </Link>
+                <button onClick={()=>handleDelete(_id)} className="btn btn-primary capitalize rounded-sm tooltip lg:tooltip" data-tip="Delete">X</button>
+                </div>
             </div>
         </div>
     )

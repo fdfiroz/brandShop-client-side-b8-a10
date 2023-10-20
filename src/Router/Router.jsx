@@ -11,6 +11,7 @@ import UpdateProduct from "../pages/UpdateProduct/UpdateProduct";
 import MyAllProduct from "../pages/MyAllProduct/MyAllProduct";
 import Bikes from "../pages/Bikes/Bikes";
 import Cars from "../pages/Cars/Cars";
+import Cart from "../pages/Cart/Cart";
 const myCreatedRoute =  createBrowserRouter([
     {
 
@@ -57,8 +58,14 @@ const myCreatedRoute =  createBrowserRouter([
             {
                 path:"cars",
                 element: <Cars></Cars>,
+                loader: () => fetch("http://localhost:5000/cars"),
+
             },
-           
+           {
+            path: "cart",
+            element: <PrivateRoute><Cart></Cart></PrivateRoute>
+
+           }
 
 
 

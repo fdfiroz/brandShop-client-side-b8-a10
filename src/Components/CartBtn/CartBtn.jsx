@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect } from "react"
 import useAuth from "../../hooks/useAuth"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const CartBtn = () => {
     const {user, loading} = useAuth()
@@ -29,7 +30,9 @@ const CartBtn = () => {
           <span className="font-bold text-lg">{cartData.length} Items</span>
           <span className="text-info">Subtotal: ${total}</span>
           <div className="card-actions">
+            <Link to={"/cart"}>
             <button className="btn btn-primary btn-block">View cart</button>
+            </Link>
           </div>
         </div>
       </div>
