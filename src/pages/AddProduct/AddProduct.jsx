@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddProduct = () => {
     const {user} = useAuth();
@@ -55,6 +56,10 @@ const AddProduct = () => {
 
     }
     return (
+        <>
+        <Helmet>
+            <title>Add Product | Brand Shop</title>
+        </Helmet>
         <div className="container mx-auto">
             <h1 className="text-2xl font-bold">Add Product</h1>
         <form onSubmit={handelSubmit} className="form-control w-full max-w-xs mx-auto ">
@@ -102,6 +107,7 @@ const AddProduct = () => {
             <input type="submit" value="Submit" className="btn btn-primary" />
         </form>
         </div>
+        </>
     )
 }
 

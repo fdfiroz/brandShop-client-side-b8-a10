@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom"
 
@@ -57,6 +58,10 @@ const UpdateProduct = () => {
     }
 
   return (
+    <>
+    <Helmet>
+      <title>{name} | Update Product</title>
+    </Helmet>
     <div className="container mx-auto">
         <h1 className="text-2xl font-bold">Add Product</h1>
     <form onSubmit={handelSubmit} className="form-control w-full max-w-xs mx-auto ">
@@ -104,6 +109,7 @@ const UpdateProduct = () => {
         <input type="submit" value="Submit" className="btn btn-primary" />
     </form>
     </div>
+    </>
 )
 }
 

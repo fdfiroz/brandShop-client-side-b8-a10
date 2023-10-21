@@ -2,12 +2,16 @@ import { useLoaderData } from "react-router-dom"
 import Card from "../../Components/Cards/Card"
 import AdSlider from "../../Components/AdSlider/AdSlider"
 import NoDataFound from "../../Components/NoDataFound/NoDataFound"
+import { Helmet } from "react-helmet-async"
 
 const Brand = () => {
     const data = useLoaderData()
     console.log(data)
   return (
    <>
+   <Helmet>
+         <title>{data[0].brandName} Brand</title>
+   </Helmet>
    <AdSlider/>
     {
         data.length === 0 ? <NoDataFound/> :

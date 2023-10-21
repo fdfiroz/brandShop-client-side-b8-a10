@@ -5,6 +5,7 @@ import NoDataFound from "../../Components/NoDataFound/NoDataFound"
 import CartCard from "../../Components/CartCard/CartCard"
 import toast from "react-hot-toast"
 import Swal from "sweetalert2"
+import { Helmet } from "react-helmet-async"
 
 const Cart = () => {
     const {user, loading} = useAuth()
@@ -75,6 +76,10 @@ const Cart = () => {
             });
     }
   return (
+   <>
+   <Helmet>
+        <title>Cart | Brand Shop</title>
+    </Helmet>
     <div>
         {
             cartData.length === 0 ? <NoDataFound></NoDataFound> : 
@@ -90,7 +95,7 @@ const Cart = () => {
             </div>
            </div>
         }
-    </div>
+    </div></>
   )
 }
 

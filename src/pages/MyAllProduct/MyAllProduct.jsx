@@ -6,9 +6,10 @@ import { useState } from "react"
 import Swal from "sweetalert2"
 import NoDataFound from "../../Components/NoDataFound/NoDataFound"
 import toast from "react-hot-toast"
+import { Helmet } from "react-helmet-async"
 
 const MyAllProduct = () => {
-  const {user, loading} = useAuth()
+  const {user} = useAuth()
   const [productsData, setProductsData] = useState([])
 useEffect(() => {
   axios.get(`https://brand-shop-server-side-fdfiroz.vercel.app/products/${user?.uid}`)
@@ -48,6 +49,9 @@ Swal.fire({
 
   return (
     <>
+    <Helmet>
+      <title>My All Product | Brand Shop</title>
+    </Helmet>
     {
       productsData?.length === 0 ? <NoDataFound></NoDataFound> :
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

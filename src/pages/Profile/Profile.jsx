@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import axios from 'axios'
+import { Helmet } from 'react-helmet-async'
 
 const Profile = () => {
   const { user, loading} = useAuth()
@@ -17,7 +18,10 @@ const Profile = () => {
   }, [loading, user?.uid])
   return (
     <>
-   
+   <Helmet>
+   <title>{newUser?.name} | Profile</title>
+   </Helmet>
+        
     <div className='h-full pt-16 flex flex-col items-center justify-center bg-base-100'>
       <div className="avatar">
         <div className="w-36 rounded-full">

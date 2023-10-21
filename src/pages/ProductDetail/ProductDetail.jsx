@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 
 export const ProductDetail = () => {
@@ -10,6 +11,10 @@ export const ProductDetail = () => {
     };
 
     return (
+        <>
+        <Helmet>
+            <title>{name} | Brand Shop</title>
+        </Helmet>
         <div className="mx-auto h-full  my-10">
             <div className="flex flex-col items-center justify-center h-6/12">
                 <figure>
@@ -47,6 +52,6 @@ export const ProductDetail = () => {
                 </button>
             </div>
            </div>
-        </div>
+        </div></>
     );
 };

@@ -1,11 +1,15 @@
 import { useLoaderData } from "react-router-dom"
 import Card from "../../Components/Cards/Card"
 import NoDataFound from "../../Components/NoDataFound/NoDataFound"
+import { Helmet } from "react-helmet-async"
 
 const Bikes = () => {
   const dataData = useLoaderData()
   return (
     <>
+    <Helmet>
+      <title>Bikes</title>
+    </Helmet>
    {
     dataData?.length === 0 ? <NoDataFound></NoDataFound> :
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
