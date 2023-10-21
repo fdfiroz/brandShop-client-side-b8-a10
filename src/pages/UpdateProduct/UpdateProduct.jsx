@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, useNavigate } from "react-router-dom"
 
 const UpdateProduct = () => {
   const [data] = useLoaderData()
   const {uid, _id, name, brandName, category, description, image, rating, price, suggestion} = data
     const [newRating, setNewRating] = useState(rating);
-    const [newSuggestion, setNewSuggestion] = useState(false);
+    const [newSuggestion, setNewSuggestion] = useState(suggestion);
+    const navigate = useNavigate();
+
     const handelChange = (e) => {
       setNewRating(e.target.value);
     }
@@ -15,12 +17,12 @@ const UpdateProduct = () => {
     const handelSubmit = (e) => {
       e.preventDefault();
       const form = e.target;
-      const name = form.name.value;
-      const brandName = form.brandName.value;
-      const description = form.description.value;
-      const category = form.category.value;
-      const price = form.price.value;
-      const image = form.image.value;
+      const name = form.name.value.trim();
+      const brandName = form.brandName.value.trim();
+      const description = form.description.value.trim();
+      const category = form.category.value.trim();
+      const price = form.price.value.trim();
+      const image = form.image.value.trim();
 
       const product = {
         uid,
@@ -31,9 +33,8 @@ const UpdateProduct = () => {
         price,
         image,
         rating: newRating,
-        newSuggestion
+        suggestion:newSuggestion
       };
-      console.log(product)
       if (price < 0) {
         toast.error("Price can not be negative");
         return;
@@ -42,11 +43,11 @@ const UpdateProduct = () => {
         toast.error("Please add Rating");
         return;
       }
-      axios.put(`http://localhost:5000/update-product/${_id}`, product)
+      axios.put(`https://brand-shop-server-side-fdfiroz.vercel.app/update-product/${_id}`, product)
         .then(res => {
-          console.log(res);
           if (res.data.modifiedCount > 0) {
             toast.success("Product updated successfully");
+            navigate("/my-all-product");
           }
         })
         .catch(error => {
@@ -98,7 +99,7 @@ const UpdateProduct = () => {
         </div>
         <label className="label cursor-pointer">
           <span className="label-text">Want to Run ad</span>
-          <input onChange={()=>setNewSuggestion(!newSuggestion)} type="checkbox" value="true" defaultChecked={suggestion&& checked} className="toggle" />
+          <input onChange={()=>setNewSuggestion(!newSuggestion)} type="checkbox" value="true" defaultChecked={newSuggestion} className="toggle" />
         </label>
         <input type="submit" value="Submit" className="btn btn-primary" />
     </form>

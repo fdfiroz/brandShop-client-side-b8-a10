@@ -14,12 +14,12 @@ const AddProduct = () => {
     const handelSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
-        const brandName = form.brandName.value;
-        const description = form.description.value;
-        const category = form.category.value;
-        const price = form.price.value;
-        const image = form.image.value;
+        const name = form.name.value.trim();
+        const brandName = form.brandName.value.trim();
+        const description = form.description.value.trim();
+        const category = form.category.value.trim();
+        const price = form.price.value.trim();
+        const image = form.image.value.trim();
 
         const product = {
             uid,
@@ -40,9 +40,8 @@ const AddProduct = () => {
             toast.error("Please add Rating");
             return;
         }
-        axios.post("http://localhost:5000/product", product)
+        axios.post("https://brand-shop-server-side-fdfiroz.vercel.app/product", product)
             .then(res => {
-                console.log(res);
                 if (res.data.insertedId) {
                     toast.success("Product added successfully");
                 }

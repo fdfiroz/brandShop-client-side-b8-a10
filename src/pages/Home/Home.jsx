@@ -1,4 +1,6 @@
 import AboutSection from "../../Components/AboutSection/AboutSection"
+import AdSlider from "../../Components/AdSlider/AdSlider";
+import BrandHome from "../../Components/BrandHome/BrandHome";
 import Header from "../../Components/Header/Header"
 
 
@@ -7,6 +9,8 @@ const Home = () => {
     <>
       <Header/>
       <AboutSection/>
+      <AdSlider/>
+      <BrandHome/>
     </>
   );
 };

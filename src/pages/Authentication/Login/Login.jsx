@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import SocialLogin from "../../../Components/ExtraLogin/SocialLogin"
 import useAuth from "../../../hooks/useAuth"
 import toast from "react-hot-toast"
@@ -10,6 +10,8 @@ import axios from "axios"
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(navigate)
   const [showPassword, setShowPassword] = useState(false);
 
   const { signIn } = useAuth()
@@ -34,22 +36,19 @@ const Login = () => {
 
     signIn(email, password)
       .then(res => {
-        console.log(res)
         const uid = res.user?.uid;
         const emailVerified = res.user?.emailVerified;
         const lastSignInTime = res.user?.metadata?.lastSignInTime;
         const photoURL = res.user?.photoURL;
         const user = { uid, lastSignInTime, emailVerified, photoURL };
-        axios.patch("http://localhost:5000/user", user)
+        axios.patch("https://brand-shop-server-side-fdfiroz.vercel.app/user", user)
           .then(res => {
-            console.log(res)
             if (res.data.acknowledged) {
-              toast.success('User Update  successfully');
+              toast.success('User login  successfully');
             }
           })
-
-        toast.success('User logged in successfully');
-        navigate('/')
+          form.values = "";
+        navigate(location.state? location.state: '/')
       })
       .catch(error => {
         toast.error(error.message)
@@ -106,7 +105,9 @@ const Login = () => {
             </form>
             <div className="divider">Or continue with</div>
 
-            <SocialLogin />
+            <div className="px-4">
+          <SocialLogin></SocialLogin>
+          </div>
             <p className="text-center mt-4">Don&apos;t have an account? <Link to={"/register"} className="font-medium text-indigo-600 hover:text-indigo-500">Register</Link></p>
           </div>
         </div>

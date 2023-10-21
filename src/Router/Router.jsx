@@ -12,6 +12,8 @@ import MyAllProduct from "../pages/MyAllProduct/MyAllProduct";
 import Bikes from "../pages/Bikes/Bikes";
 import Cars from "../pages/Cars/Cars";
 import Cart from "../pages/Cart/Cart";
+import { ProductDetail } from "../pages/ProductDetail/ProductDetail";
+import Brand from "../pages/Brand/Brand";
 const myCreatedRoute =  createBrowserRouter([
     {
 
@@ -39,7 +41,7 @@ const myCreatedRoute =  createBrowserRouter([
             {
                 path: "update-product/:id",
                 element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/product/${params.id}`),
+                loader: ({params}) => fetch(`https://brand-shop-server-side-fdfiroz.vercel.app/product/${params.id}`),
             },
 
             {
@@ -53,20 +55,30 @@ const myCreatedRoute =  createBrowserRouter([
             {
                 path: "bikes",
                 element: <Bikes></Bikes>,
-                loader: () => fetch("http://localhost:5000/motorcycles"),
+                loader: () => fetch("https://brand-shop-server-side-fdfiroz.vercel.app/motorcycles"),
             },
             {
                 path:"cars",
                 element: <Cars></Cars>,
-                loader: () => fetch("http://localhost:5000/cars"),
+                loader: () => fetch("https://brand-shop-server-side-fdfiroz.vercel.app/cars"),
 
             },
            {
             path: "cart",
             element: <PrivateRoute><Cart></Cart></PrivateRoute>
 
+           },
+         
+           {
+            path: "product-detail/:id",
+            element: <PrivateRoute><ProductDetail/></PrivateRoute>,
+            loader: ({params}) => fetch(`https://brand-shop-server-side-fdfiroz.vercel.app/product/${params.id}`),
+           },
+           {
+            path: "brand/:brandName",
+            element: <Brand/>,
+            loader: ({params}) => fetch(`https://brand-shop-server-side-fdfiroz.vercel.app/brand/${params.brandName}`),
            }
-
 
 
             

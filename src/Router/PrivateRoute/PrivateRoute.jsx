@@ -4,9 +4,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const location = useLocation();
-
+    console.log(location)
     if (loading) {
-        return <span className="loading loading-infinity  w-32"></span>
+        return <div className="flex justify-center items-center h-screen">
+            <span className="loading loading-spinner  w-32"></span>
+        </div>
     }
 
     if (user) {

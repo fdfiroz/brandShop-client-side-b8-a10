@@ -19,7 +19,7 @@ const SocialLogin = () => {
               const createdAt = res.user?.metadata?.creationTime;
               const lastSignInTime = res.user?.metadata?.lastSignInTime;
               const user = { name, email, uid, lastSignInTime, emailVerified, createdAt, photoURL };
-              axios.post('http://localhost:5000/user', user)
+              axios.patch('https://brand-shop-server-side-fdfiroz.vercel.app/user', user)
                 .then(res => {
                   if (res.data.insertedId) {
                     toast.success('User Data inserted successfully');

@@ -11,14 +11,15 @@ const MyAllProduct = () => {
   const {user, loading} = useAuth()
   const [productsData, setProductsData] = useState([])
 useEffect(() => {
-  axios.get(`http://localhost:5000/products/${user?.uid}`)
+  axios.get(`https://brand-shop-server-side-fdfiroz.vercel.app/products/${user?.uid}`)
   .then((res) => {
+    console.log(res)
     setProductsData(res.data)
   })
   .catch((err) => {
     console.log(err);
   }) 
-}, [loading])
+}, [user?.uid])
 
 const handleDelete = id => {
   // make sure user is confirmed to delete
@@ -31,11 +32,10 @@ Swal.fire({
 }).then((result) => {
   /* Read more about isConfirmed, isDenied below */
   if (result.isConfirmed) {
-    axios.delete(`http://localhost:5000/product/${id}`)
+    axios.delete(`https://brand-shop-server-side-fdfiroz.vercel.app/product/${id}`)
     .then((res) => {
       if(res.data.deletedCount > 0){
         toast.success('Deleted successfully!')
-        // remove the user from the UI
         const remainingProduct = productsData.filter(user => user._id !== id);
         setProductsData(remainingProduct);
       }

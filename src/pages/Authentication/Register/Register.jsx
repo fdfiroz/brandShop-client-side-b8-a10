@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../../../Components/ExtraLogin/SocialLogin";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ import axios from "axios";
 const Register = () => {
   const { createUser, handleUpdateProfile } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 const [showPassword, setShowPassword] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,15 +33,13 @@ const [showPassword, setShowPassword] = useState(false);
     }
     createUser(email, password)
             .then(res => {
-              console.log(res)
               const emailVerified = res.user?.emailVerified;
               const createdAt = res.user?.metadata?.creationTime;
               const uid = res.user?.uid;
               const lastSignInTime = res.user?.metadata?.lastSignInTime;
               const user = { name, email, uid, lastSignInTime, emailVerified, createdAt };
-              axios.post("http://localhost:5000/user", user)
+              axios.post("https://brand-shop-server-side-fdfiroz.vercel.app/user", user)
                 .then(res => {
-                  console.log(res)
                   if (res.data.insertedId) {
                     toast.success("User created successfully");
                   } else {
@@ -49,8 +48,10 @@ const [showPassword, setShowPassword] = useState(false);
                 })
                 handleUpdateProfile(name)
                     .then(() => {
-                        navigate('/')
+                      
+                  navigate(location.state? location.state: '/')
 
+                  form.values = "";
                     })
             })
             .catch(error => {
@@ -128,7 +129,9 @@ const [showPassword, setShowPassword] = useState(false);
             </div>
           </form>
           <div className="divider">Or continue with</div>
+          <div className="px-4">
           <SocialLogin></SocialLogin>
+          </div>
           <p className="text-center mt-4">Already have an account? <Link to={"/login"} className="font-medium text-indigo-600 hover:text-indigo-500">Login</Link></p>
         </div>
       </div>

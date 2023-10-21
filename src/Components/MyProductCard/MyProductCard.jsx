@@ -6,9 +6,9 @@ const MyProductCard = ({data, handleDelete}) => {
     return (
         
         <div className="card w-96 bg-base-100 h-auto shadow-xl">
-            <figure className="px-2 pt-2 object-center w-80 h-72 mx-auto">
+            <Link to={`/product-detail/${_id}`} className="px-2 pt-2 object-center w-80 h-72 mx-auto tooltip" data-tip="View Detail">
                 <img src={image} alt="Shoes" className="rounded-xl" />
-            </figure>
+            </Link>
 
             <div className="card-body items-center justify-items-center text-center py-2 px-2">
                 <div className="flex gap-4">
@@ -17,7 +17,7 @@ const MyProductCard = ({data, handleDelete}) => {
                 </div>
                 <h2 className="text-lg font-bold">{name}</h2>
 
-                <p className="text-base self-center">{description.slice(0, 100)} ...</p>
+                <Link to={`/product-detail/${_id}`} className="text-base self-center tooltip" data-tip="View Detail">{description.slice(0, 100)} ...</Link>
                 <h5 className="font-medium">Taka: {price}/-</h5>
                <div className="inline-flex items-center gap-2">
                <div className="rating" disabled>

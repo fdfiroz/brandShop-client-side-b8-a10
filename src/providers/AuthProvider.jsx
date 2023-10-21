@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
@@ -9,7 +11,6 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    console.log(user)
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) => {

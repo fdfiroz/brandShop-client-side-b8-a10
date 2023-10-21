@@ -9,14 +9,14 @@ const CartBtn = () => {
     const [cartData, setCartData] = useState([])
     const total = cartData.reduce((acc, curr) => acc + parseInt(curr.price), 0);
     useEffect(() => {
-        axios.post(`http://localhost:5000/cart/${user?.email}`)
+        axios.get(`https://brand-shop-server-side-fdfiroz.vercel.app/cart/${user?.email}`)
             .then((res) => {
                 setCartData(res.data);
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, [loading])
+    }, [ loading, user?.uid])
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -31,7 +31,7 @@ const CartBtn = () => {
           <span className="text-info">Subtotal: ${total}</span>
           <div className="card-actions">
             <Link to={"/cart"}>
-            <button className="btn btn-primary btn-block">View cart</button>
+            <button className="btn btn-primary btn-block bg-base-300">View cart</button>
             </Link>
           </div>
         </div>
